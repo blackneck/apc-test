@@ -1,28 +1,36 @@
 import {StyleSheet} from 'react-native';
-import {appColors} from '../../../../common/colors';
+import {appColors} from 'src/common/colors';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    backgroundColor: appColors.background,
+  },
+  listContainer: {
+    padding: 15,
   },
   descriptionContainer: {
     backgroundColor: appColors.foreground,
     padding: 10,
     marginBottom: 30,
+    borderRadius: 10,
+  },
+  sectionHeader: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    marginVertical: 10,
   },
   commentContainer: {
     backgroundColor: appColors.foreground,
     padding: 20,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 10,
+    borderColor: appColors.borderColor,
   },
   separator: {
     height: 30,
-    width: 5,
-    backgroundColor: appColors.foreground,
+    width: 1,
+    backgroundColor: appColors.borderColor,
     marginLeft: 30,
-  },
-  listContainer: {
-    backgroundColor: appColors.background,
-    padding: 15,
   },
   commentUserContainer: {
     flexDirection: 'row',

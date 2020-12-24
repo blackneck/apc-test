@@ -21,38 +21,48 @@ export default ({
   handleFilterChange,
   handleIssuePress,
   isIssuesLoading,
+  handleEndReached,
+  handleRefresh,
 }: SeacrhScreenProps) => {
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder="Organisation"
-        style={styles.textInput}
-        autoCapitalize={'none'}
-        onChangeText={handleOrganisationChange}
-      />
-      <TextInput
-        placeholder="Repository"
-        style={styles.textInput}
-        autoCapitalize={'none'}
-        onChangeText={handleRepositoryChange}
-      />
-      <Button onPress={handleSearch} title="search" />
-      <SegmentedControl
-        style={styles.secmentedControl}
-        values={filterSegmentedControlOptions}
-        onValueChange={handleFilterChange}
-        selectedIndex={1}
-      />
-      {isIssuesLoading ? (
-        <ActivityIndicator style={styles.spinner} />
-      ) : (
+      <View style={styles.inputsContainer}>
+        <TextInput
+          placeholder="Organisation"
+          style={styles.textInput}
+          autoCapitalize={'none'}
+          onChangeText={handleOrganisationChange}
+          returnKeyType="done"
+        />
+        <TextInput
+          placeholder="Repository"
+          style={styles.textInput}
+          autoCapitalize={'none'}
+          onChangeText={handleRepositoryChange}
+          returnKeyType="done"
+        />
+        <Button onPress={handleSearch} title="search" />
+        <SegmentedControl
+          style={styles.secmentedControl}
+          values={filterSegmentedControlOptions}
+          onValueChange={handleFilterChange}
+          selectedIndex={1}
+        />
+      </View>
+      {!isIssuesLoading && issuesList.length === 0 ? null : (
         <FlatList
           refreshing={false}
-          onRefresh={() => {}}
           data={issuesList}
-          keyExtractor={(item) => item.id.toString()}
           style={styles.listWrapperContainer}
-          contentContainerStyle={styles.listContainer}
+          onEndReached={handleEndReached}
+          onEndReachedThreshold={0.5}
+          removeClippedSubviews={true}
+          maxToRenderPerBatch={20}
+          ListFooterComponent={
+            <ActivityIndicator style={styles.loadMoreSpinner} />
+          }
+          onRefresh={handleRefresh}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({item}) => (
             <IssueListItem onPress={handleIssuePress} issue={item} />
           )}

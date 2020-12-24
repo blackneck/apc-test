@@ -1,10 +1,10 @@
 import {Navigation} from 'react-native-navigation';
 
-import Search from '../modules/Search';
-import Bookmarks from '../modules/Bookmarks';
-import IssueDetails from '../modules/Search/containers/IssueDetailsScreenContainer';
-import StoreProvider from '../store/StoreProvider';
-import SortModal from '../modules/Search/containers/SortModalContainer';
+import Search from 'src/modules/Search';
+import Bookmarks from 'src/modules/Bookmarks';
+import IssueDetails from 'src/modules/Search/containers/IssueDetailsScreenContainer';
+import StoreProvider from 'src/store/StoreProvider';
+import SortModal from 'src/modules/Search/containers/SortModalContainer';
 
 export default () => {
   Navigation.registerComponent('Search', () => StoreProvider(Search));

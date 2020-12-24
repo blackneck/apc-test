@@ -8,3 +8,6 @@ export const getIsLoading = (state: {search: SeacrhState}) =>
 
 export const getIssueCommentsList = (state: {search: SeacrhState}) =>
   state.search.issueCommentsList;
+
+export const getCurrentIssuesPage = (state: {search: SeacrhState}) =>
+  state.search.currentIssuesPage;

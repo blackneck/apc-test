@@ -4,6 +4,8 @@ export type SeacrhScreenProps = {
   handleRepositoryChange: (text: string) => void;
   handleFilterChange: (filter: 'open' | 'closed' | 'all') => void;
   handleIssuePress: (issue: Issue) => void;
+  handleEndReached: () => void;
+  handleRefresh: () => void;
   issuesList: Array<Issue>;
   filter: 'open' | 'closed' | 'all';
   isIssuesLoading: boolean;
@@ -36,6 +38,7 @@ export type SeacrhState = {
   currentIssue: Issue | {};
   isIssuesLoading: boolean;
   issueCommentsList: Array<Comment>;
+  currentIssuesPage: number;
 };
 
 export type Comment = {

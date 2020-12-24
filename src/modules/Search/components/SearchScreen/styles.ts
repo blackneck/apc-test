@@ -1,9 +1,13 @@
 import {StyleSheet} from 'react-native';
-import {appColors} from '../../../../common/colors';
+import {appColors} from 'src/common/colors';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: appColors.background,
+  },
+  inputsContainer: {
+    backgroundColor: appColors.foreground,
   },
   textInput: {
     borderRadius: 5,
@@ -20,16 +24,15 @@ export default StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: appColors.borderColor,
   },
-  listContainer: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: appColors.borderColor,
-  },
   secmentedControl: {
     marginHorizontal: 15,
     marginBottom: 15,
   },
   spinner: {
     flex: 1,
+  },
+  loadMoreSpinner: {
+    marginBottom: -40,
+    marginTop: 20,
   },
 });

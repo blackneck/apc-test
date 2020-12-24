@@ -8,9 +8,10 @@ export const getIssuesRequestConfig = ({
   sort,
   organisation,
   repository,
+  page,
 }: RequestIssuesParameters): AxiosRequestConfig => {
-  const query = queryString.stringify({state, sort});
-  console.log(`/repos/${organisation}/${repository}/issues?${query}`);
+  const query = queryString.stringify({state, sort, page});
+
   return {
     url: `/repos/${organisation}/${repository}/issues?${query}`,
     method: 'GET',
@@ -22,9 +23,6 @@ export const getIssueCommentsRequestConfig = ({
   repository,
   issueNumber,
 }: RequestIssueCommentsParameters): AxiosRequestConfig => {
-  console.log(
-    `/repos/${organisation}/${repository}/issues/${issueNumber}/comments`,
-  );
   return {
     url: `/repos/${organisation}/${repository}/issues/${issueNumber}/comments`,
     method: 'GET',

@@ -9,8 +9,18 @@ import {
   setOrganisation,
   setRepository,
 } from '../actions';
+import {Issue} from '../types';
 
-const initialState = {};
+const initialState = {
+  currentIssuesPage: 1,
+  organisation: '',
+  repository: '',
+  isIssuesLoading: false,
+  issuesList: [],
+  error: null,
+  isIssueCommentsLoading: false,
+  issueCommentsList: [],
+};
 
 export default handleActions(
   {
@@ -26,10 +36,16 @@ export default handleActions(
       ...state,
       isIssuesLoading: true,
     }),
-    [getIssuesSuccess]: (state, {payload}) => ({
+    [getIssuesSuccess]: (
+      state,
+      {payload}: {payload: {data: Array<Issue>; page?: number}},
+    ) => ({
       ...state,
-      issuesList: payload,
       isIssuesLoading: false,
+      issuesList: payload.page
+        ? [...state.issuesList, ...payload.data]
+        : payload.data,
+      currentIssuesPage: payload.page ? payload.page : 1,
     }),
     [getIssuesFail]: (state, {payload}) => ({
       ...state,

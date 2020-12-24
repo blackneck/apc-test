@@ -1,14 +1,14 @@
-import {all, call, put, takeLatest} from 'redux-saga/effects';
+import {all, call, put, takeLatest, takeLeading} from 'redux-saga/effects';
 
-import {makeRequest} from '../../../api/axios';
+import {makeRequest} from 'src/api/axios';
 import {
   getIssueCommentsRequestConfig,
   getIssuesRequestConfig,
-} from '../../../api/issues';
+} from 'src/api/issues';
 import {
   RequestIssueCommentsParameters,
   RequestIssuesParameters,
-} from '../../../api/types';
+} from 'src/api/types';
 
 import * as actions from '../actions';
 
@@ -23,7 +23,9 @@ function* handleGetIssuesRequest({
       getIssuesRequestConfig({...payload}),
     );
 
-    yield put(actions.getIssuesSuccess(response.data));
+    yield put(
+      actions.getIssuesSuccess({data: response.data, page: payload.page}),
+    );
   } catch (error) {
     yield put(actions.getIssuesFail(error));
   }
@@ -39,7 +41,7 @@ function* handleGetIssueCommentsRequest({
       makeRequest,
       getIssueCommentsRequestConfig({...payload}),
     );
-    console.log(response.data.length, 'huj');
+
     yield put(actions.getIssueCommentsSuccess(response.data));
   } catch (error) {
     yield put(actions.getIssueCommentsFail(error));
@@ -48,7 +50,7 @@ function* handleGetIssueCommentsRequest({
 
 export default function* seacrhSaga() {
   yield all([
-    takeLatest(actions.getIssuesRequest, handleGetIssuesRequest),
+    takeLeading(actions.getIssuesRequest, handleGetIssuesRequest),
     takeLatest(actions.getIssueCommentsRequest, handleGetIssueCommentsRequest),
   ]);
 }

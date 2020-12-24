@@ -15,13 +15,18 @@ export default ({
   return (
     <FlatList
       ListHeaderComponent={
-        <View style={styles.descriptionContainer}>
-          <Markdown>{issue.body}</Markdown>
-        </View>
+        <>
+          <Text style={styles.sectionHeader}>Description</Text>
+          <View style={styles.descriptionContainer}>
+            <Markdown>{issue.body}</Markdown>
+          </View>
+          <Text style={styles.sectionHeader}>Comments</Text>
+        </>
       }
       keyExtractor={(item) => item.id.toString()}
       data={issueCommentsList}
-      style={styles.listContainer}
+      style={styles.container}
+      contentContainerStyle={styles.listContainer}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       renderItem={({item}) => (
         <View style={styles.commentContainer}>

@@ -4,7 +4,7 @@ import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 
 import {sortOptionsScheme} from '../../constants';
 import styles from './styles';
-import {appColors} from '../../../../common/colors';
+import {appColors} from 'src/common/colors';
 
 export default ({
   currentSort,

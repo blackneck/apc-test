@@ -16,7 +16,6 @@ export default ({
     [onSubmit],
   );
 
-  console.log(currentSort);
   return (
     <SortModal currentSort={currentSort} handleSortChange={handleSortChange} />
   );

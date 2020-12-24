@@ -3,15 +3,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 
 import {getIssuesRequest} from '../actions';
-import {getIssuesList, getIsLoading} from '../selectors';
+import {getIssuesList, getIsLoading, getCurrentIssuesPage} from '../selectors';
 import SearchScreen from '../components/SearchScreen';
 import {Issue} from '../types';
 
 export default ({componentId}: {componentId: string}) => {
   const dispatch = useDispatch();
 
-  const [organisation, setOrganisation] = useState<string>('');
-  const [repository, setRepository] = useState<string>('');
+  const [organisation, setOrganisation] = useState<string>('facebook');
+  const [repository, setRepository] = useState<string>('react-native');
   const [filter, setFilter] = useState<'open' | 'closed' | 'all'>('all');
   const [sort, setSort] = useState<'created' | 'updated' | 'comments'>(
     'created',
@@ -19,6 +19,7 @@ export default ({componentId}: {componentId: string}) => {
 
   const issuesList = useSelector(getIssuesList);
   const isIssuesLoading = useSelector(getIsLoading);
+  const currentPage = useSelector(getCurrentIssuesPage);
 
   const performSearch = useCallback(
     (parameters: {
@@ -26,6 +27,7 @@ export default ({componentId}: {componentId: string}) => {
       repository: string;
       sort: 'created' | 'updated' | 'comments';
       state: 'open' | 'closed' | 'all';
+      page?: number;
     }) => {
       dispatch(getIssuesRequest({...parameters}));
     },
@@ -79,6 +81,20 @@ export default ({componentId}: {componentId: string}) => {
     [componentId, organisation, repository],
   );
 
+  const handleEndReached = useCallback(() => {
+    performSearch({
+      organisation,
+      repository,
+      sort,
+      state: filter,
+      page: currentPage + 1,
+    });
+  }, [performSearch, organisation, repository, filter, sort, currentPage]);
+
+  const handleRefresh = useCallback(() => {
+    performSearch({organisation, repository, sort, state: filter});
+  }, [performSearch, organisation, repository, filter, sort]);
+
   useEffect(() => {
     const listener = Navigation.events().registerNavigationButtonPressedListener(
       () => {
@@ -121,6 +137,8 @@ export default ({componentId}: {componentId: string}) => {
       filter={filter}
       handleIssuePress={handleIssuePress}
       isIssuesLoading={isIssuesLoading}
+      handleEndReached={handleEndReached}
+      handleRefresh={handleRefresh}
     />
   );
 };

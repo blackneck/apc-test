@@ -1,7 +1,7 @@
 import {Navigation} from 'react-native-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
-import {appColors} from '../common/colors';
 
+import {appColors} from 'src/common/colors';
 import registerScreens from './registerScreens';
 
 registerScreens();
