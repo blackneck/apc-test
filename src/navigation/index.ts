@@ -1,13 +1,10 @@
 import {Navigation} from 'react-native-navigation';
-import Icon from 'react-native-vector-icons/Octicons';
 
 import {appColors} from 'src/common/colors';
+import {bookmarkTabIcon, searchTabIcon} from 'src/common/icons';
 import registerScreens from './registerScreens';
 
 registerScreens();
-
-const searchIcon = Icon.getImageSourceSync('search', 20);
-const bookmarkIcon = Icon.getImageSourceSync('bookmark', 20);
 
 export default () => {
   Navigation.setRoot({
@@ -39,7 +36,7 @@ export default () => {
               options: {
                 bottomTab: {
                   text: 'Explore',
-                  icon: searchIcon,
+                  icon: searchTabIcon,
                   selectedIconColor: appColors.blue,
                   selectedTextColor: appColors.blue,
                 },
@@ -54,13 +51,23 @@ export default () => {
                   component: {
                     id: 'BOOKMARKS_SCREEN',
                     name: 'Bookmarks',
+                    // options: {
+                    //   topBar: {
+                    //     rightButtons: [
+                    //       {
+                    //         id: 'EDIT_BOOKMARKS_BUTTON_ID',
+                    //         text: 'Edit',
+                    //       },
+                    //     ],
+                    //   },
+                    // },
                   },
                 },
               ],
               options: {
                 bottomTab: {
                   text: 'Bookmarks',
-                  icon: bookmarkIcon,
+                  icon: bookmarkTabIcon,
                   selectedIconColor: appColors.blue,
                   selectedTextColor: appColors.blue,
                 },

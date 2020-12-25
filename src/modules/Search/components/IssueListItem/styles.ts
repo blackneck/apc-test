@@ -29,7 +29,6 @@ export default StyleSheet.create({
     paddingVertical: 3,
     margin: 2,
   },
-  labelText: {},
   icon: {
     marginTop: 7,
     marginHorizontal: 15,
@@ -39,8 +38,5 @@ export default StyleSheet.create({
   },
   closed: {
     color: appColors.red,
-  },
-  time: {
-    marginHorizontal: 15,
   },
 });

@@ -1,6 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Navigation} from 'react-native-navigation';
+import {Keyboard} from 'react-native';
 
 import {getIssuesRequest} from '../actions';
 import {getIssuesList, getIsLoading, getCurrentIssuesPage} from '../selectors';
@@ -10,8 +11,8 @@ import {Issue} from '../types';
 export default ({componentId}: {componentId: string}) => {
   const dispatch = useDispatch();
 
-  const [organisation, setOrganisation] = useState<string>('facebook');
-  const [repository, setRepository] = useState<string>('react-native');
+  const [organisation, setOrganisation] = useState<string>('');
+  const [repository, setRepository] = useState<string>('');
   const [filter, setFilter] = useState<'open' | 'closed' | 'all'>('all');
   const [sort, setSort] = useState<'created' | 'updated' | 'comments'>(
     'created',
@@ -35,6 +36,7 @@ export default ({componentId}: {componentId: string}) => {
   );
 
   const handleSeacrh = useCallback((): void => {
+    Keyboard.dismiss();
     performSearch({organisation, repository, sort: sort, state: filter});
   }, [organisation, repository, filter, sort, performSearch]);
 
@@ -96,36 +98,40 @@ export default ({componentId}: {componentId: string}) => {
   }, [performSearch, organisation, repository, filter, sort]);
 
   useEffect(() => {
-    const listener = Navigation.events().registerNavigationButtonPressedListener(
-      () => {
-        Navigation.showModal({
-          stack: {
-            children: [
-              {
-                component: {
-                  id: 'SORT_MODAL_ID',
-                  name: 'SortModal',
-                  passProps: {
-                    currentSort: sort,
-                    onSubmit: handleSortChange,
-                  },
-                  options: {
-                    topBar: {
-                      title: {
-                        text: 'Sort issues',
-                      },
-                    },
-                  },
-                },
-              },
-            ],
-          },
-        });
-      },
-    );
-
-    return () => listener.remove();
+    // const listener = Navigation.events().registerNavigationButtonPressedListener(
+    //   () => {
+    //     Navigation.showModal({
+    //       stack: {
+    //         children: [
+    //           {
+    //             component: {
+    //               id: 'SORT_MODAL_ID',
+    //               name: 'SortModal',
+    //               passProps: {
+    //                 currentSort: sort,
+    //                 onSubmit: handleSortChange,
+    //               },
+    //               options: {
+    //                 topBar: {
+    //                   title: {
+    //                     text: 'Sort issues',
+    //                   },
+    //                 },
+    //               },
+    //             },
+    //           },
+    //         ],
+    //       },
+    //     });
+    //   },
+    // );
+    // return () => listener.remove();
   }, [sort, handleSortChange]);
+
+  const isSearchEnabled = useMemo(() => Boolean(organisation && repository), [
+    organisation,
+    repository,
+  ]);
 
   return (
     <SearchScreen
@@ -139,6 +145,7 @@ export default ({componentId}: {componentId: string}) => {
       isIssuesLoading={isIssuesLoading}
       handleEndReached={handleEndReached}
       handleRefresh={handleRefresh}
+      isSearchEnabled={isSearchEnabled}
     />
   );
 };

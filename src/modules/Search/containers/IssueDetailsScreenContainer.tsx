@@ -1,23 +1,30 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import {getIssueCommentsList} from '../selectors';
 import {getIssueCommentsRequest} from '../actions';
 import IssueDetailsScreen from '../components/IssueDetailsScreen';
 import {Issue} from '../types';
+import {addBookmark, removeBookmark} from 'src/modules/Bookmarks/actions';
+import {getBookmarksSheme} from 'src/modules/Bookmarks/selectors';
+import {plus, trashcan} from 'src/common/icons';
 
 export default ({
   issue,
   organisation,
   repository,
+  componentId,
 }: {
   issue: Issue;
   repository: string;
   organisation: string;
+  componentId: string;
 }) => {
   const dispatch = useDispatch();
 
   const issueCommentsList = useSelector(getIssueCommentsList);
+  const bookmarksScheme = useSelector(getBookmarksSheme);
 
   useEffect(() => {
     dispatch(
@@ -28,6 +35,38 @@ export default ({
       }),
     );
   }, [dispatch, issue.number, organisation, repository]);
+
+  useEffect(() => {
+    const listener = Navigation.events().registerNavigationButtonPressedListener(
+      () => {
+        !bookmarksScheme[issue.number]
+          ? dispatch(addBookmark({...issue, organisation, repository}))
+          : dispatch(removeBookmark(issue.number));
+      },
+    );
+
+    return () => listener.remove();
+  }, [
+    repository,
+    organisation,
+    issue,
+    dispatch,
+    bookmarksScheme,
+    issue.number,
+  ]);
+
+  useEffect(() => {
+    Navigation.mergeOptions(componentId, {
+      topBar: {
+        rightButtons: [
+          {
+            id: 'BOOKMARK_BUTTON_ID',
+            icon: !bookmarksScheme[issue.number] ? plus : trashcan,
+          },
+        ],
+      },
+    });
+  }, [componentId, issue.number, bookmarksScheme]);
 
   return (
     <IssueDetailsScreen issue={issue} issueCommentsList={issueCommentsList} />

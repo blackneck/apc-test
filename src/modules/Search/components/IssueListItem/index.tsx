@@ -13,7 +13,7 @@ export default ({
   issue: Issue;
   handlePress: () => void;
 }) => (
-  <TouchableOpacity onPress={handlePress}>
+  <TouchableOpacity activeOpacity={0.7} onPress={handlePress}>
     <View style={styles.container}>
       <Icon
         name={issueIconNameScheme[issue.state]}
@@ -30,7 +30,7 @@ export default ({
                 styles.labelContainer,
                 {backgroundColor: `#${label.color}`},
               ]}>
-              <Text style={styles.labelText}>{label.name}</Text>
+              <Text>{label.name}</Text>
             </View>
           ))}
         </View>

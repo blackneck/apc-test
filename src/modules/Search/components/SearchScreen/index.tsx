@@ -23,6 +23,7 @@ export default ({
   isIssuesLoading,
   handleEndReached,
   handleRefresh,
+  isSearchEnabled,
 }: SeacrhScreenProps) => {
   return (
     <View style={styles.container}>
@@ -41,7 +42,11 @@ export default ({
           onChangeText={handleRepositoryChange}
           returnKeyType="done"
         />
-        <Button onPress={handleSearch} title="search" />
+        <Button
+          onPress={handleSearch}
+          title="Search"
+          disabled={!isSearchEnabled}
+        />
         <SegmentedControl
           style={styles.secmentedControl}
           values={filterSegmentedControlOptions}
@@ -51,7 +56,7 @@ export default ({
       </View>
       {!isIssuesLoading && issuesList.length === 0 ? null : (
         <FlatList
-          refreshing={false}
+          refreshing={isIssuesLoading}
           data={issuesList}
           style={styles.listWrapperContainer}
           onEndReached={handleEndReached}

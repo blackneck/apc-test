@@ -22,6 +22,7 @@ export default ({
       keyExtractor={(item) => item.label}
       renderItem={({item}) => (
         <TouchableOpacity
+          activeOpacity={0.7}
           style={styles.itemContainer}
           onPress={handleSortChange(item.value)}>
           <Text>{item.label}</Text>

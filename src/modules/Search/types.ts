@@ -9,6 +9,7 @@ export type SeacrhScreenProps = {
   issuesList: Array<Issue>;
   filter: 'open' | 'closed' | 'all';
   isIssuesLoading: boolean;
+  isSearchEnabled: boolean;
 };
 
 export type Label = {
