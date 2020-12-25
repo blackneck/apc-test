@@ -43,3 +43,9 @@ or
 ```
 yarn android
 ```
+
+## 👩‍🔬 Testing
+#### Run tests
+```sh
+yarn test
+```
