@@ -1,3 +1,4 @@
+import {Platform} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
 import {appColors} from 'src/common/colors';
@@ -39,7 +40,7 @@ export default () => {
               ],
               options: {
                 bottomTab: {
-                  text: 'Explore',
+                  text: Platform.OS === 'ios' ? 'Explore' : '',
                   icon: searchTabIcon,
                   selectedIconColor: appColors.blue,
                   selectedTextColor: appColors.blue,
@@ -73,7 +74,7 @@ export default () => {
               ],
               options: {
                 bottomTab: {
-                  text: 'Saved',
+                  text: Platform.OS === 'ios' ? 'Saved' : '',
                   icon: bookmarkTabIcon,
                   selectedIconColor: appColors.blue,
                   selectedTextColor: appColors.blue,

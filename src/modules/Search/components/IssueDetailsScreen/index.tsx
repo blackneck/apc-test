@@ -20,7 +20,9 @@ export default ({
           <View style={styles.descriptionContainer}>
             <Markdown>{issue.body}</Markdown>
           </View>
-          <Text style={styles.sectionHeader}>Comments</Text>
+          {issueCommentsList.length > 0 && (
+            <Text style={styles.sectionHeader}>Comments</Text>
+          )}
         </>
       }
       keyExtractor={(item) => item.id.toString()}
