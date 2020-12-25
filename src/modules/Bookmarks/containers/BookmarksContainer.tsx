@@ -37,7 +37,7 @@ export default ({componentId}: {componentId: string}) => {
             issue: bookmark,
             organisation: bookmark.organisation,
             repository: bookmark.repository,
-            RightButtonId: BOOKMARK_RIGHT_BUTTON_ID,
+            rightButtonId: BOOKMARK_RIGHT_BUTTON_ID,
           },
         },
       });

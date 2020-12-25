@@ -81,7 +81,7 @@ export default ({componentId}: {componentId: string}) => {
             issue,
             organisation,
             repository,
-            RightButtonId: ISSUE_RIGHT_BUTTON_ID,
+            rightButtonId: ISSUE_RIGHT_BUTTON_ID,
           },
         },
       });

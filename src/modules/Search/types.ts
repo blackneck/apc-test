@@ -19,7 +19,7 @@ export type IssueDetailsScreenProps = {
   repository: string;
   organisation: string;
   componentId: string;
-  RightButtonId: string;
+  rightButtonId: string;
 };
 
 export type Label = {

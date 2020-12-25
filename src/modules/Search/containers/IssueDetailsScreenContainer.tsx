@@ -15,7 +15,7 @@ export default ({
   organisation,
   repository,
   componentId,
-  RightButtonId,
+  rightButtonId,
 }: IssueDetailsScreenProps) => {
   const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ export default ({
   useEffect(() => {
     const listener = Navigation.events().registerNavigationButtonPressedListener(
       ({buttonId}) => {
-        if (buttonId === RightButtonId) {
+        if (buttonId === rightButtonId) {
           !bookmarksScheme[issue.number]
             ? dispatch(addBookmark({...issue, organisation, repository}))
             : dispatch(removeBookmark(issue.number));
@@ -51,7 +51,7 @@ export default ({
     dispatch,
     bookmarksScheme,
     issue.number,
-    RightButtonId,
+    rightButtonId,
   ]);
 
   useEffect(() => {
@@ -59,13 +59,13 @@ export default ({
       topBar: {
         rightButtons: [
           {
-            id: currentButtonId,
+            id: rightButtonId,
             icon: !bookmarksScheme[issue.number] ? plus : trashcan,
           },
         ],
       },
     });
-  }, [componentId, issue.number, bookmarksScheme, currentButtonId]);
+  }, [componentId, issue.number, bookmarksScheme, rightButtonId]);
 
   return (
     <IssueDetailsScreen issue={issue} issueCommentsList={issueCommentsList} />
