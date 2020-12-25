@@ -2,7 +2,7 @@ export type BookmarksScreenProps = {
   handleBookmarkPress: (bookmark: Bookmark) => void;
   bookmarks: Array<Bookmark> | null;
   isEditing: boolean;
-  selectedBookmarks: {[index: number]: boolean};
+  // selectedBookmarks: {[index: number]: boolean};
   // isDeleteVisible: boolean;
 };
 
@@ -16,7 +16,7 @@ export type Bookmark = {
   state: 'open' | 'closed';
 };
 
-export type CombinedPayloads = Bookmark | string;
+export type CombinedPayloads = Bookmark;
 
 export type BookmarksState = {
   bookmarksScheme: {[index: string]: Bookmark};

@@ -10,8 +10,8 @@ export default ({
   bookmarks,
   handleBookmarkPress,
   isEditing,
-  selectedBookmarks,
-}: // isDeleteVisible,
+}: // selectedBookmarks,
+// isDeleteVisible,
 BookmarksScreenProps) => {
   return (
     <View>
@@ -24,7 +24,7 @@ BookmarksScreenProps) => {
             isEditing={isEditing}
             onPress={handleBookmarkPress}
             bookmark={item}
-            isSelected={selectedBookmarks[item.number]}
+            // isSelected={selectedBookmarks[item.number]}
           />
         )}
       />

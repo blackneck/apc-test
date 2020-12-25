@@ -7,12 +7,12 @@ export default ({
   onPress,
   bookmark,
   isEditing,
-  isSelected,
-}: {
+}: // isSelected,
+{
   bookmark: Bookmark;
   onPress: (bookmark: Bookmark) => void;
   isEditing: boolean;
-  isSelected: boolean;
+  // isSelected: boolean;
 }) => {
   const handlePress = useCallback(() => {
     onPress(bookmark);
@@ -23,7 +23,7 @@ export default ({
       isEditing={isEditing}
       handlePress={handlePress}
       bookmark={bookmark}
-      isSelected={isSelected}
+      // isSelected={isSelected}
     />
   );
 };

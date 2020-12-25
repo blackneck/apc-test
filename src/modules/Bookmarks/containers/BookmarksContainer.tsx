@@ -9,38 +9,41 @@ import {Bookmark} from '../types';
 
 export default ({componentId}: {componentId: string}) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedBookmarks, setSelectedBookmarks] = useState<{
-    [index: number]: boolean;
-  }>({});
+  // const [selectedBookmarks, setSelectedBookmarks] = useState<{
+  //   [index: number]: boolean;
+  // }>({});
 
   const bookmarks = useSelector(getBookmarksList);
 
   const handleBookmarkPress = useCallback(
     (bookmark: Bookmark) => {
-      if (isEditing) {
-        setSelectedBookmarks((currentSelection) => {
-          const {
-            [bookmark.number]: isCurrentBookmarkSelected,
-            ...otherSelectedBookmarks
-          } = currentSelection;
-          return isCurrentBookmarkSelected
-            ? otherSelectedBookmarks
-            : {...currentSelection, [bookmark.number]: true};
-        });
-      } else {
-        Navigation.push(componentId, {
-          component: {
-            name: 'IssueDetails',
-            passProps: {
-              issue: bookmark,
-              organisation: bookmark.organisation,
-              repository: bookmark.repository,
-            },
+      // if (isEditing) {
+      // setSelectedBookmarks((currentSelection) => {
+      //   const {
+      //     [bookmark.number]: isCurrentBookmarkSelected,
+      //     ...otherSelectedBookmarks
+      //   } = currentSelection;
+      //   return isCurrentBookmarkSelected
+      //     ? otherSelectedBookmarks
+      //     : {...currentSelection, [bookmark.number]: true};
+      // });
+      // } else {
+      Navigation.push(componentId, {
+        component: {
+          name: 'IssueDetails',
+          passProps: {
+            issue: bookmark,
+            organisation: bookmark.organisation,
+            repository: bookmark.repository,
           },
-        });
-      }
+        },
+      });
+      // }
     },
-    [componentId, isEditing],
+    [
+      componentId,
+      // isEditing
+    ],
   );
 
   useEffect(() => {
@@ -82,7 +85,7 @@ export default ({componentId}: {componentId: string}) => {
       isEditing={isEditing}
       bookmarks={bookmarks}
       handleBookmarkPress={handleBookmarkPress}
-      selectedBookmarks={selectedBookmarks}
+      // selectedBookmarks={selectedBookmarks}
       // isDeleteVisible={isDeleteVisible}
     />
   );

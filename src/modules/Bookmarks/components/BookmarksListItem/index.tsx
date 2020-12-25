@@ -5,28 +5,28 @@ import Icon from 'react-native-vector-icons/Octicons';
 import {Bookmark} from '../../types';
 import {issueIconNameScheme} from 'src/modules/Search/constants';
 import styles from './styles';
-import {appColors} from 'src/common/colors';
+// import {appColors} from 'src/common/colors';
 
 export default ({
   bookmark,
   handlePress,
-  isEditing,
-  isSelected,
-}: {
+}: // isEditing,
+// isSelected,
+{
   bookmark: Bookmark;
   handlePress: () => void;
   isEditing: boolean;
-  isSelected: boolean;
+  // isSelected: boolean;
 }) => (
   <TouchableOpacity
     activeOpacity={0.7}
     onPress={handlePress}
     style={styles.selectionWrapper}>
-    {isEditing && (
+    {/* {isEditing && (
       <View style={styles.selectionCircle}>
         {isSelected && <Icon name="check" color={appColors.blue} size={15} />}
       </View>
-    )}
+    )} */}
     <View style={styles.container}>
       <Icon
         name={issueIconNameScheme[bookmark.state]}
