@@ -18,8 +18,8 @@ import {Filter, Sort} from 'src/api/types';
 export default ({componentId}: {componentId: string}) => {
   const dispatch = useDispatch();
 
-  const [organisation, setOrganisation] = useState<string>('facebook');
-  const [repository, setRepository] = useState<string>('react-native');
+  const [organisation, setOrganisation] = useState<string>('');
+  const [repository, setRepository] = useState<string>('');
   const [filter, setFilter] = useState<Filter>('all');
   const [sort, setSort] = useState<Sort>('created');
 

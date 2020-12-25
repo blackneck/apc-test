@@ -17,7 +17,6 @@ export default handleActions<BookmarksState, CombinedPayloads>(
       },
     }),
     [removeBookmark]: (state, {payload}: Action<string>) => {
-      console.log(payload, state.bookmarksScheme);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {[payload]: skip, ...updatedIssues} = state.bookmarksScheme;
 
