@@ -26,7 +26,7 @@ export default StyleSheet.create({
   },
   secmentedControl: {
     marginHorizontal: 15,
-    marginBottom: 15,
+    marginVertical: 15,
   },
   spinner: {
     flex: 1,

@@ -42,16 +42,16 @@ export default ({
           onChangeText={handleRepositoryChange}
           returnKeyType="done"
         />
-        <Button
-          onPress={handleSearch}
-          title="Search"
-          disabled={!isSearchEnabled}
-        />
         <SegmentedControl
           style={styles.secmentedControl}
           values={filterSegmentedControlOptions}
           onValueChange={handleFilterChange}
           selectedIndex={1}
+        />
+        <Button
+          onPress={handleSearch}
+          title="Search"
+          disabled={!isSearchEnabled}
         />
       </View>
       {!isIssuesLoading && issuesList.length === 0 ? null : (
