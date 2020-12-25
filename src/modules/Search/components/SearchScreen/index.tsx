@@ -64,7 +64,9 @@ export default ({
           removeClippedSubviews={true}
           maxToRenderPerBatch={20}
           ListFooterComponent={
-            <ActivityIndicator style={styles.loadMoreSpinner} />
+            issuesList.length > 0 ? (
+              <ActivityIndicator style={styles.loadMoreSpinner} />
+            ) : null
           }
           onRefresh={handleRefresh}
           keyExtractor={(item) => item.id.toString()}
