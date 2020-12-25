@@ -1,14 +1,15 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback} from 'react';
 import {Navigation} from 'react-native-navigation';
 import {useSelector} from 'react-redux';
-import {LayoutAnimation} from 'react-native';
+// import {LayoutAnimation} from 'react-native';
 
 import BookmarsScreen from '../components/BookmarksScreen';
 import {getBookmarksList} from '../selectors';
 import {Bookmark} from '../types';
+import {BOOKMARK_RIGHT_BUTTON_ID} from 'src/navigation/componentIds';
 
 export default ({componentId}: {componentId: string}) => {
-  const [isEditing, setIsEditing] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
   // const [selectedBookmarks, setSelectedBookmarks] = useState<{
   //   [index: number]: boolean;
   // }>({});
@@ -30,11 +31,13 @@ export default ({componentId}: {componentId: string}) => {
       // } else {
       Navigation.push(componentId, {
         component: {
+          // id: BOOKMARK_DETAILS_SCREEN,
           name: 'IssueDetails',
           passProps: {
             issue: bookmark,
             organisation: bookmark.organisation,
             repository: bookmark.repository,
+            RightButtonId: BOOKMARK_RIGHT_BUTTON_ID,
           },
         },
       });
@@ -46,16 +49,16 @@ export default ({componentId}: {componentId: string}) => {
     ],
   );
 
-  useEffect(() => {
-    const listener = Navigation.events().registerNavigationButtonPressedListener(
-      () => {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-        setIsEditing((currentValue) => !currentValue);
-      },
-    );
+  // useEffect(() => {
+  //   const listener = Navigation.events().registerNavigationButtonPressedListener(
+  //     () => {
+  //       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  //       setIsEditing((currentValue) => !currentValue);
+  //     },
+  //   );
 
-    return () => listener.remove();
-  }, []);
+  //   return () => listener.remove();
+  // }, []);
 
   // useEffect(() => {
   //   Navigation.mergeOptions(componentId, {
@@ -82,7 +85,7 @@ export default ({componentId}: {componentId: string}) => {
 
   return (
     <BookmarsScreen
-      isEditing={isEditing}
+      // isEditing={isEditing}
       bookmarks={bookmarks}
       handleBookmarkPress={handleBookmarkPress}
       // selectedBookmarks={selectedBookmarks}

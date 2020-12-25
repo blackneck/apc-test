@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Octicons';
 import {Issue} from '../../types';
 import {issueIconNameScheme} from '../../constants';
 import styles from './styles';
+import invert from 'invert-color';
 
 export default ({
   issue,
@@ -30,7 +31,9 @@ export default ({
                 styles.labelContainer,
                 {backgroundColor: `#${label.color}`},
               ]}>
-              <Text>{label.name}</Text>
+              <Text style={{color: invert(label.color, true)}}>
+                {label.name}
+              </Text>
             </View>
           ))}
         </View>

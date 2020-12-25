@@ -9,8 +9,8 @@ import styles from './styles';
 export default ({
   bookmarks,
   handleBookmarkPress,
-  isEditing,
-}: // selectedBookmarks,
+}: // isEditing,
+// selectedBookmarks,
 // isDeleteVisible,
 BookmarksScreenProps) => {
   return (
@@ -21,7 +21,7 @@ BookmarksScreenProps) => {
         style={styles.listWrapperContainer}
         renderItem={({item}) => (
           <BookmarksListItem
-            isEditing={isEditing}
+            // isEditing={isEditing}
             onPress={handleBookmarkPress}
             bookmark={item}
             // isSelected={selectedBookmarks[item.number]}

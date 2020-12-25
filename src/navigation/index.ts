@@ -2,6 +2,7 @@ import {Navigation} from 'react-native-navigation';
 
 import {appColors} from 'src/common/colors';
 import {bookmarkTabIcon, searchTabIcon} from 'src/common/icons';
+import * as componentIds from './componentIds';
 import registerScreens from './registerScreens';
 
 registerScreens();
@@ -10,21 +11,21 @@ export default () => {
   Navigation.setRoot({
     root: {
       bottomTabs: {
-        id: 'ROOT_BOTTOM_TABS',
+        id: componentIds.ROOT_BOTTOM_TABS,
         children: [
           {
             stack: {
-              id: 'SEARCH_TAB',
+              id: componentIds.SEARCH_TAB,
               children: [
                 {
                   component: {
-                    id: 'SEARCH_SCREEN',
+                    id: componentIds.SEARCH_SCREEN,
                     name: 'Search',
                     options: {
                       topBar: {
                         rightButtons: [
                           {
-                            id: 'SORT_ISSUES_BUTTON_ID',
+                            id: componentIds.SORT_ISSUES_BUTTON_ID,
                             text: 'Sort',
                           },
                         ],
@@ -45,11 +46,11 @@ export default () => {
           },
           {
             stack: {
-              id: 'BOOKAMARKS_TAB',
+              id: componentIds.BOOKMARKS_TAB,
               children: [
                 {
                   component: {
-                    id: 'BOOKMARKS_SCREEN',
+                    id: componentIds.BOOKMARKS_SCREEN,
                     name: 'Bookmarks',
                     // options: {
                     //   topBar: {

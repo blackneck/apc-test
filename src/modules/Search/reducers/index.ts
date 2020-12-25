@@ -6,32 +6,32 @@ import {
   getIssuesFail,
   getIssuesRequest,
   getIssuesSuccess,
-  setOrganisation,
-  setRepository,
+  // setOrganisation,
+  // setRepository,
 } from '../actions';
 import {Issue} from '../types';
 
 const initialState = {
   currentIssuesPage: 1,
-  organisation: '',
-  repository: '',
+  // organisation: '',
+  // repository: '',
   isIssuesLoading: false,
   issuesList: [],
   error: null,
-  isIssueCommentsLoading: false,
+  // isIssueCommentsLoading: false,
   issueCommentsList: [],
 };
 
 export default handleActions(
   {
-    [setOrganisation]: (state, {payload}) => ({
-      ...state,
-      organisation: payload,
-    }),
-    [setRepository]: (state, {payload}) => ({
-      ...state,
-      repository: payload,
-    }),
+    // [setOrganisation]: (state, {payload}) => ({
+    //   ...state,
+    //   organisation: payload,
+    // }),
+    // [setRepository]: (state, {payload}) => ({
+    //   ...state,
+    //   repository: payload,
+    // }),
     [getIssuesRequest]: (state) => ({
       ...state,
       isIssuesLoading: true,

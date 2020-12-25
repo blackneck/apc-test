@@ -1,6 +1,6 @@
 export type RequestIssuesParameters = {
-  state?: 'open' | 'closed' | 'all';
-  sort?: 'updated' | 'created' | 'comments';
+  state?: Filter;
+  sort?: Sort;
   organisation: string;
   repository: string;
   page?: number;
@@ -12,3 +12,6 @@ export type RequestIssueCommentsParameters = {
   repository: string;
   issueNumber: number;
 };
+
+export type Filter = 'open' | 'closed' | 'all';
+export type Sort = 'updated' | 'created' | 'comments';

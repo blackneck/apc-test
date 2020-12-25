@@ -5,22 +5,18 @@ import {Navigation} from 'react-native-navigation';
 import {getIssueCommentsList} from '../selectors';
 import {getIssueCommentsRequest} from '../actions';
 import IssueDetailsScreen from '../components/IssueDetailsScreen';
-import {Issue} from '../types';
 import {addBookmark, removeBookmark} from 'src/modules/Bookmarks/actions';
 import {getBookmarksSheme} from 'src/modules/Bookmarks/selectors';
 import {plus, trashcan} from 'src/common/icons';
+import {IssueDetailsScreenProps} from '../types';
 
 export default ({
   issue,
   organisation,
   repository,
   componentId,
-}: {
-  issue: Issue;
-  repository: string;
-  organisation: string;
-  componentId: string;
-}) => {
+  RightButtonId,
+}: IssueDetailsScreenProps) => {
   const dispatch = useDispatch();
 
   const issueCommentsList = useSelector(getIssueCommentsList);
@@ -38,10 +34,12 @@ export default ({
 
   useEffect(() => {
     const listener = Navigation.events().registerNavigationButtonPressedListener(
-      () => {
-        !bookmarksScheme[issue.number]
-          ? dispatch(addBookmark({...issue, organisation, repository}))
-          : dispatch(removeBookmark(issue.number));
+      ({buttonId}) => {
+        if (buttonId === RightButtonId) {
+          !bookmarksScheme[issue.number]
+            ? dispatch(addBookmark({...issue, organisation, repository}))
+            : dispatch(removeBookmark(issue.number));
+        }
       },
     );
 
@@ -53,6 +51,7 @@ export default ({
     dispatch,
     bookmarksScheme,
     issue.number,
+    RightButtonId,
   ]);
 
   useEffect(() => {
@@ -60,13 +59,13 @@ export default ({
       topBar: {
         rightButtons: [
           {
-            id: 'BOOKMARK_BUTTON_ID',
+            id: currentButtonId,
             icon: !bookmarksScheme[issue.number] ? plus : trashcan,
           },
         ],
       },
     });
-  }, [componentId, issue.number, bookmarksScheme]);
+  }, [componentId, issue.number, bookmarksScheme, currentButtonId]);
 
   return (
     <IssueDetailsScreen issue={issue} issueCommentsList={issueCommentsList} />

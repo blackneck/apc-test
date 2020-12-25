@@ -1,10 +1,10 @@
 import {createAction} from 'redux-actions';
 import {Issue} from '../types';
 
-export const setOrganisation = createAction('SET_ORGANISATION');
-export const setRepository = createAction('SET_REPOSITORY');
-export const setFilter = createAction('SET_FILTERING');
-export const setSorting = createAction('SET_SORTING');
+// export const setOrganisation = createAction('SET_ORGANISATION');
+// export const setRepository = createAction('SET_REPOSITORY');
+// export const setFilter = createAction('SET_FILTERING');
+// export const setSorting = createAction('SET_SORTING');
 
 export const getIssuesRequest = createAction('GET_ISSUES_REQUEST');
 export const getIssuesSuccess = createAction<{

@@ -6,12 +6,12 @@ import {Bookmark} from '../types';
 export default ({
   onPress,
   bookmark,
-  isEditing,
-}: // isSelected,
+}: // isEditing,
+// isSelected,
 {
   bookmark: Bookmark;
   onPress: (bookmark: Bookmark) => void;
-  isEditing: boolean;
+  // isEditing: boolean;
   // isSelected: boolean;
 }) => {
   const handlePress = useCallback(() => {
@@ -20,7 +20,7 @@ export default ({
 
   return (
     <BookmarksListItem
-      isEditing={isEditing}
+      // isEditing={isEditing}
       handlePress={handlePress}
       bookmark={bookmark}
       // isSelected={isSelected}

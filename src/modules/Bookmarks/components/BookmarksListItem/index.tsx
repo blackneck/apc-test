@@ -15,7 +15,7 @@ export default ({
 {
   bookmark: Bookmark;
   handlePress: () => void;
-  isEditing: boolean;
+  // isEditing: boolean;
   // isSelected: boolean;
 }) => (
   <TouchableOpacity

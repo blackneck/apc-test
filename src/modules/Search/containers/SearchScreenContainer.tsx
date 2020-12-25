@@ -7,16 +7,21 @@ import {getIssuesRequest} from '../actions';
 import {getIssuesList, getIsLoading, getCurrentIssuesPage} from '../selectors';
 import SearchScreen from '../components/SearchScreen';
 import {Issue} from '../types';
+import {
+  SORT_ISSUES_BUTTON_ID,
+  SORT_MODAL_ID,
+  ISSUE_RIGHT_BUTTON_ID,
+} from 'src/navigation/componentIds';
+import {showSortModal} from '../helpers';
+import {Filter, Sort} from 'src/api/types';
 
 export default ({componentId}: {componentId: string}) => {
   const dispatch = useDispatch();
 
-  const [organisation, setOrganisation] = useState<string>('');
-  const [repository, setRepository] = useState<string>('');
-  const [filter, setFilter] = useState<'open' | 'closed' | 'all'>('all');
-  const [sort, setSort] = useState<'created' | 'updated' | 'comments'>(
-    'created',
-  );
+  const [organisation, setOrganisation] = useState<string>('facebook');
+  const [repository, setRepository] = useState<string>('react-native');
+  const [filter, setFilter] = useState<Filter>('all');
+  const [sort, setSort] = useState<Sort>('created');
 
   const issuesList = useSelector(getIssuesList);
   const isIssuesLoading = useSelector(getIsLoading);
@@ -26,8 +31,8 @@ export default ({componentId}: {componentId: string}) => {
     (parameters: {
       organisation: string;
       repository: string;
-      sort: 'created' | 'updated' | 'comments';
-      state: 'open' | 'closed' | 'all';
+      sort: Sort;
+      state: Filter;
       page?: number;
     }) => {
       dispatch(getIssuesRequest({...parameters}));
@@ -41,15 +46,15 @@ export default ({componentId}: {componentId: string}) => {
   }, [organisation, repository, filter, sort, performSearch]);
 
   const handleOrganisationChange = useCallback((text: string): void => {
-    setOrganisation(text);
+    setOrganisation(text.trim());
   }, []);
 
   const handleRepositoryChange = useCallback((text: string): void => {
-    setRepository(text);
+    setRepository(text.trim());
   }, []);
 
   const handleFilterChange = useCallback(
-    (filterValue: 'open' | 'closed' | 'all'): void => {
+    (filterValue: Filter): void => {
       setFilter(filterValue);
       performSearch({organisation, repository, sort: sort, state: filterValue});
     },
@@ -58,7 +63,7 @@ export default ({componentId}: {componentId: string}) => {
 
   const handleSortChange = useCallback(
     (sortValue: 'created' | 'updated' | 'comments'): void => {
-      Navigation.updateProps('SORT_MODAL_ID', {
+      Navigation.updateProps(SORT_MODAL_ID, {
         currentSort: sortValue,
       });
       setSort(sortValue);
@@ -76,6 +81,7 @@ export default ({componentId}: {componentId: string}) => {
             issue,
             organisation,
             repository,
+            RightButtonId: ISSUE_RIGHT_BUTTON_ID,
           },
         },
       });
@@ -98,34 +104,15 @@ export default ({componentId}: {componentId: string}) => {
   }, [performSearch, organisation, repository, filter, sort]);
 
   useEffect(() => {
-    // const listener = Navigation.events().registerNavigationButtonPressedListener(
-    //   () => {
-    //     Navigation.showModal({
-    //       stack: {
-    //         children: [
-    //           {
-    //             component: {
-    //               id: 'SORT_MODAL_ID',
-    //               name: 'SortModal',
-    //               passProps: {
-    //                 currentSort: sort,
-    //                 onSubmit: handleSortChange,
-    //               },
-    //               options: {
-    //                 topBar: {
-    //                   title: {
-    //                     text: 'Sort issues',
-    //                   },
-    //                 },
-    //               },
-    //             },
-    //           },
-    //         ],
-    //       },
-    //     });
-    //   },
-    // );
-    // return () => listener.remove();
+    const listener = Navigation.events().registerNavigationButtonPressedListener(
+      ({buttonId}) => {
+        if (buttonId === SORT_ISSUES_BUTTON_ID) {
+          showSortModal({currentSort: sort, onSubmit: handleSortChange});
+        }
+      },
+    );
+
+    return () => listener.remove();
   }, [sort, handleSortChange]);
 
   const isSearchEnabled = useMemo(() => Boolean(organisation && repository), [

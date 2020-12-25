@@ -1,7 +1,7 @@
 export type BookmarksScreenProps = {
   handleBookmarkPress: (bookmark: Bookmark) => void;
   bookmarks: Array<Bookmark> | null;
-  isEditing: boolean;
+  // isEditing: boolean;
   // selectedBookmarks: {[index: number]: boolean};
   // isDeleteVisible: boolean;
 };

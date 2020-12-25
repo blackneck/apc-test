@@ -1,15 +1,25 @@
+import {Filter} from 'src/api/types';
+
 export type SeacrhScreenProps = {
   handleSearch: () => void;
   handleOrganisationChange: (text: string) => void;
   handleRepositoryChange: (text: string) => void;
-  handleFilterChange: (filter: 'open' | 'closed' | 'all') => void;
+  handleFilterChange: (filter: Filter) => void;
   handleIssuePress: (issue: Issue) => void;
   handleEndReached: () => void;
   handleRefresh: () => void;
   issuesList: Array<Issue>;
-  filter: 'open' | 'closed' | 'all';
+  filter: Filter;
   isIssuesLoading: boolean;
   isSearchEnabled: boolean;
+};
+
+export type IssueDetailsScreenProps = {
+  issue: Issue;
+  repository: string;
+  organisation: string;
+  componentId: string;
+  RightButtonId: string;
 };
 
 export type Label = {
