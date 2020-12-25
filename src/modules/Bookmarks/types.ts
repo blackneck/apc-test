@@ -7,16 +7,15 @@ export type BookmarksScreenProps = {
 };
 
 export type Bookmark = {
-  id: number;
   organisation: string;
   repository: string;
   title: string;
   body: string;
-  number: number;
+  html_url: string;
   state: 'open' | 'closed';
 };
 
-export type CombinedPayloads = Bookmark;
+export type CombinedPayloads = Bookmark | string;
 
 export type BookmarksState = {
   bookmarksScheme: {[index: string]: Bookmark};

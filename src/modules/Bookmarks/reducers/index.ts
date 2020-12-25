@@ -3,7 +3,7 @@ import {handleActions, Action} from 'redux-actions';
 import {addBookmark, removeBookmark} from '../actions';
 import {Bookmark, BookmarksState, CombinedPayloads} from '../types';
 
-const initialState: BookmarksState = {
+export const initialState: BookmarksState = {
   bookmarksScheme: {},
 };
 
@@ -12,11 +12,12 @@ export default handleActions<BookmarksState, CombinedPayloads>(
     [addBookmark]: (state, {payload}: Action<Bookmark>) => ({
       ...state,
       bookmarksScheme: {
-        [payload.number]: payload,
+        [payload.html_url]: payload,
         ...state.bookmarksScheme,
       },
     }),
-    [removeBookmark]: (state, {payload}: Action<number>) => {
+    [removeBookmark]: (state, {payload}: Action<string>) => {
+      console.log(payload, state.bookmarksScheme);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {[payload]: skip, ...updatedIssues} = state.bookmarksScheme;
 

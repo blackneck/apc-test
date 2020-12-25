@@ -36,9 +36,9 @@ export default ({
     const listener = Navigation.events().registerNavigationButtonPressedListener(
       ({buttonId}) => {
         if (buttonId === rightButtonId) {
-          !bookmarksScheme[issue.number]
+          !bookmarksScheme[issue.html_url]
             ? dispatch(addBookmark({...issue, organisation, repository}))
-            : dispatch(removeBookmark(issue.number));
+            : dispatch(removeBookmark(issue.html_url));
         }
       },
     );
@@ -50,7 +50,6 @@ export default ({
     issue,
     dispatch,
     bookmarksScheme,
-    issue.number,
     rightButtonId,
   ]);
 
@@ -60,12 +59,12 @@ export default ({
         rightButtons: [
           {
             id: rightButtonId,
-            icon: !bookmarksScheme[issue.number] ? plus : trashcan,
+            icon: !bookmarksScheme[issue.html_url] ? plus : trashcan,
           },
         ],
       },
     });
-  }, [componentId, issue.number, bookmarksScheme, rightButtonId]);
+  }, [componentId, issue.html_url, bookmarksScheme, rightButtonId]);
 
   return (
     <IssueDetailsScreen issue={issue} issueCommentsList={issueCommentsList} />

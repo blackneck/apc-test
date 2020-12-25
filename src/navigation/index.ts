@@ -23,6 +23,9 @@ export default () => {
                     name: 'Search',
                     options: {
                       topBar: {
+                        title: {
+                          text: 'Issues',
+                        },
                         rightButtons: [
                           {
                             id: componentIds.SORT_ISSUES_BUTTON_ID,
@@ -52,22 +55,25 @@ export default () => {
                   component: {
                     id: componentIds.BOOKMARKS_SCREEN,
                     name: 'Bookmarks',
-                    // options: {
-                    //   topBar: {
-                    //     rightButtons: [
-                    //       {
-                    //         id: 'EDIT_BOOKMARKS_BUTTON_ID',
-                    //         text: 'Edit',
-                    //       },
-                    //     ],
-                    //   },
-                    // },
+                    options: {
+                      topBar: {
+                        title: {
+                          text: 'Bookmarks',
+                        },
+                        // rightButtons: [
+                        //   {
+                        //     id: 'EDIT_BOOKMARKS_BUTTON_ID',
+                        //     text: 'Edit',
+                        //   },
+                        // ],
+                      },
+                    },
                   },
                 },
               ],
               options: {
                 bottomTab: {
-                  text: 'Bookmarks',
+                  text: 'Saved',
                   icon: bookmarkTabIcon,
                   selectedIconColor: appColors.blue,
                   selectedTextColor: appColors.blue,

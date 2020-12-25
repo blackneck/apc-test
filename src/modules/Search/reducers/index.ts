@@ -1,4 +1,5 @@
-import {handleActions} from 'redux-actions';
+import {Action, handleActions} from 'redux-actions';
+
 import {
   getIssueCommentsFail,
   getIssueCommentsRequest,
@@ -11,7 +12,7 @@ import {
 } from '../actions';
 import {Issue} from '../types';
 
-const initialState = {
+export const initialState = {
   currentIssuesPage: 1,
   // organisation: '',
   // repository: '',
@@ -38,7 +39,7 @@ export default handleActions(
     }),
     [getIssuesSuccess]: (
       state,
-      {payload}: {payload: {data: Array<Issue>; page?: number}},
+      {payload}: Action<{data: Array<Issue>; page?: number}>,
     ) => ({
       ...state,
       isIssuesLoading: false,

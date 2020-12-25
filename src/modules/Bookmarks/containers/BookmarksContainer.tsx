@@ -21,12 +21,12 @@ export default ({componentId}: {componentId: string}) => {
       // if (isEditing) {
       // setSelectedBookmarks((currentSelection) => {
       //   const {
-      //     [bookmark.number]: isCurrentBookmarkSelected,
+      //     [bookmark.html_url]: isCurrentBookmarkSelected,
       //     ...otherSelectedBookmarks
       //   } = currentSelection;
       //   return isCurrentBookmarkSelected
       //     ? otherSelectedBookmarks
-      //     : {...currentSelection, [bookmark.number]: true};
+      //     : {...currentSelection, [bookmark.html_url]: true};
       // });
       // } else {
       Navigation.push(componentId, {
@@ -80,7 +80,7 @@ export default ({componentId}: {componentId: string}) => {
   // }, [componentId, isEditing]);
 
   // const isDeleteVisible = useMemo(() => {
-  //   return bookmarks.some((bookmark) => selectedBookmarks[bookmark.number]);
+  //   return bookmarks.some((bookmark) => selectedBookmarks[bookmark.html_url]);
   // }, [selectedBookmarks, bookmarks]);
 
   return (

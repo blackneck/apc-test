@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList} from 'react-native';
 
 import {BookmarksScreenProps} from '../../types';
 import BookmarksListItem from '../../containers/BookmarkListItemContainer';
@@ -14,9 +14,9 @@ export default ({
 // isDeleteVisible,
 BookmarksScreenProps) => {
   return (
-    <View>
+    <>
       <FlatList
-        keyExtractor={(item) => item.number.toString()}
+        keyExtractor={(item) => item.html_url}
         data={bookmarks}
         style={styles.listWrapperContainer}
         renderItem={({item}) => (
@@ -24,7 +24,7 @@ BookmarksScreenProps) => {
             // isEditing={isEditing}
             onPress={handleBookmarkPress}
             bookmark={item}
-            // isSelected={selectedBookmarks[item.number]}
+            // isSelected={selectedBookmarks[item.html_url]}
           />
         )}
       />
@@ -33,6 +33,6 @@ BookmarksScreenProps) => {
           <Button title="Delete" color={appColors.red} onPress={() => {}} />
         </View>
       )} */}
-    </View>
+    </>
   );
 };
