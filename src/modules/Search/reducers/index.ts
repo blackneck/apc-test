@@ -23,7 +23,10 @@ export const initialState = {
   issueCommentsList: [],
 };
 
-export default handleActions<SeacrhState, {data: Array<Issue>; page?: number}>(
+export default handleActions<
+  SeacrhState,
+  {data: Array<Issue>; page?: number} | Error
+>(
   {
     // [setOrganisation]: (state, {payload}) => ({
     //   ...state,
@@ -48,10 +51,9 @@ export default handleActions<SeacrhState, {data: Array<Issue>; page?: number}>(
         : payload.data,
       currentIssuesPage: payload.page ? payload.page : 1,
     }),
-    [getIssuesFail]: (state, {payload}) => ({
-      ...state,
+    [getIssuesFail]: (_, {payload}: Action<Error>) => ({
+      ...initialState,
       error: payload,
-      isIssuesLoading: false,
     }),
     [getIssueCommentsRequest]: (state) => ({
       ...state,
@@ -66,6 +68,7 @@ export default handleActions<SeacrhState, {data: Array<Issue>; page?: number}>(
       ...state,
       error: payload,
       isIssueCommentsLoading: false,
+      issueCommentsList: initialState.issueCommentsList,
     }),
   },
   initialState,

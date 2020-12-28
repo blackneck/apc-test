@@ -2,7 +2,7 @@ import moment from 'moment';
 import {Action} from 'redux-actions';
 
 import {testIsueHtmlUrl} from 'src/modules/Bookmarks/mocks';
-import {getIssuesSuccess} from '../actions';
+import {getIssuesFail, getIssuesSuccess} from '../actions';
 import {Issue} from '../types';
 
 export const testIssue0: Issue = {
@@ -82,4 +82,10 @@ export const testGetIssuesWithPageSuccessAction: Action<{
 }> = {
   type: getIssuesSuccess.toString(),
   payload: testIssuesPayloadWithPage,
+};
+
+export const testGetIssuesFailAction: Action<Error> = {
+  type: getIssuesFail.toString(),
+  error: true,
+  payload: new Error(),
 };

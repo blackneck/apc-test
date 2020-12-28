@@ -1,7 +1,9 @@
 import {
+  testGetIssuesFailAction,
   testGetIssuesSuccessAction,
   testGetIssuesWithPageSuccessAction,
   testIssue0,
+  testIssue1,
 } from '../mocks';
 import reducer, {initialState} from '../reducers';
 
@@ -28,6 +30,22 @@ describe('search reducer', () => {
         testIssue0,
         ...testGetIssuesWithPageSuccessAction.payload.data,
       ],
+    });
+  });
+
+  it('should reset search state to initioal value', () => {
+    expect(
+      reducer(
+        {
+          ...initialState,
+          issuesList: [testIssue0, testIssue1],
+          currentIssuesPage: 2,
+        },
+        testGetIssuesFailAction,
+      ),
+    ).toEqual({
+      ...initialState,
+      error: testGetIssuesFailAction.payload,
     });
   });
 });
