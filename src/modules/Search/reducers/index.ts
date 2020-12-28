@@ -10,7 +10,7 @@ import {
   // setOrganisation,
   // setRepository,
 } from '../actions';
-import {Issue} from '../types';
+import {Issue, SeacrhState} from '../types';
 
 export const initialState = {
   currentIssuesPage: 1,
@@ -23,7 +23,7 @@ export const initialState = {
   issueCommentsList: [],
 };
 
-export default handleActions(
+export default handleActions<SeacrhState, {data: Array<Issue>; page?: number}>(
   {
     // [setOrganisation]: (state, {payload}) => ({
     //   ...state,

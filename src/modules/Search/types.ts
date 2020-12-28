@@ -42,14 +42,13 @@ export type Issue = {
 
 export type SeacrhState = {
   issuesList: Array<Issue>;
-  organisation: string;
-  repository: string;
-  sorting: string;
-  filtering: string;
-  currentIssue: Issue | {};
   isIssuesLoading: boolean;
   issueCommentsList: Array<Comment>;
   currentIssuesPage: number;
+  // organisation: '',
+  // repository: '',
+  error: Error | null;
+  // isIssueCommentsLoading: false,
 };
 
 export type Comment = {
