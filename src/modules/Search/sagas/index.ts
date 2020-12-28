@@ -12,7 +12,7 @@ import {
 
 import * as actions from '../actions';
 
-function* handleGetIssuesRequest({
+export function* handleGetIssuesRequest({
   payload,
 }: {
   payload: RequestIssuesParameters;
@@ -31,7 +31,7 @@ function* handleGetIssuesRequest({
   }
 }
 
-function* handleGetIssueCommentsRequest({
+export function* handleGetIssueCommentsRequest({
   payload,
 }: {
   payload: RequestIssueCommentsParameters;

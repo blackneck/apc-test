@@ -8,7 +8,7 @@ export const showSortModal = ({
 }: {
   currentSort: 'created' | 'updated' | 'comments';
   onSubmit: (sortValue: 'created' | 'updated' | 'comments') => void;
-}) => {
+}): void => {
   Navigation.showModal({
     stack: {
       children: [

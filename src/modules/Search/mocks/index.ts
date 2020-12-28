@@ -1,8 +1,9 @@
 import moment from 'moment';
 import {Action} from 'redux-actions';
+import {RequestIssuesParameters} from 'src/api/types';
 
 import {testIsueHtmlUrl} from 'src/modules/Bookmarks/mocks';
-import {getIssuesFail, getIssuesSuccess} from '../actions';
+import {getIssuesFail, getIssuesRequest, getIssuesSuccess} from '../actions';
 import {Issue} from '../types';
 
 export const testIssue0: Issue = {
@@ -88,4 +89,16 @@ export const testGetIssuesFailAction: Action<Error> = {
   type: getIssuesFail.toString(),
   error: true,
   payload: new Error(),
+};
+
+export const testGetApcTestIssuesRequestAction: Action<RequestIssuesParameters> = {
+  type: getIssuesRequest.toString(),
+  payload: {
+    organisation: 'blackneck',
+    repository: 'apc-test',
+    sort: 'created',
+    state: 'all',
+    page: 1,
+    per_page: 1,
+  },
 };

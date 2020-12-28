@@ -17,12 +17,12 @@ export default ({
   handleSearch,
   handleRepositoryChange,
   handleOrganisationChange,
-  issuesList,
   handleFilterChange,
   handleIssuePress,
-  isIssuesLoading,
   handleEndReached,
   handleRefresh,
+  issuesList,
+  isIssuesLoading,
   isSearchEnabled,
 }: SeacrhScreenProps) => {
   return (
@@ -54,27 +54,26 @@ export default ({
           disabled={!isSearchEnabled}
         />
       </View>
-      {!isIssuesLoading && issuesList.length === 0 ? null : (
-        <FlatList
-          refreshing={isIssuesLoading}
-          data={issuesList}
-          style={styles.listWrapperContainer}
-          onEndReached={handleEndReached}
-          onEndReachedThreshold={0.5}
-          removeClippedSubviews={true}
-          maxToRenderPerBatch={20}
-          ListFooterComponent={
-            issuesList.length > 0 ? (
-              <ActivityIndicator style={styles.loadMoreSpinner} />
-            ) : null
-          }
-          onRefresh={handleRefresh}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({item}) => (
-            <IssueListItem onPress={handleIssuePress} issue={item} />
-          )}
-        />
-      )}
+      <FlatList
+        keyboardShouldPersistTaps="never"
+        refreshing={isIssuesLoading}
+        data={issuesList}
+        style={styles.listWrapperContainer}
+        onEndReached={handleEndReached}
+        onEndReachedThreshold={0.5}
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={20}
+        ListFooterComponent={
+          issuesList.length > 0 ? (
+            <ActivityIndicator style={styles.loadMoreSpinner} />
+          ) : null
+        }
+        onRefresh={handleRefresh}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({item}) => (
+          <IssueListItem onPress={handleIssuePress} issue={item} />
+        )}
+      />
     </View>
   );
 };
